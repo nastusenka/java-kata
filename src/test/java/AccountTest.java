@@ -18,8 +18,8 @@ public class AccountTest {
         Assert.assertEquals(550, account.getAccountBalance());
     }
 
-    @Test
-    public void testDepositBelowZero() throws InvalidArgumentException, InvalidBalanceException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDepositBelowZero() throws IllegalArgumentException, InvalidBalanceException {
         new Account(50).deposit(-1);
     }
 }
