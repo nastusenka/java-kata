@@ -11,9 +11,9 @@ public class AccountTest {
     }
 
     @Test
-    public void testDeposit() {
+    public void testDeposit() throws InvalidBalanceException {
         Account account = new Account(50);
         account.deposit(500);
-        Assert.assertEquals(550; account.getAccountBalance());
+        Assert.assertEquals(550, account.getAccountBalance());
     }
 }
