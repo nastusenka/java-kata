@@ -32,7 +32,6 @@ public class AccountTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testWithdrawBelowZero() throws IllegalArgumentException, InvalidBalanceException {
-        new Account(50).deposit(-1);
+        new Account(50).withdraw(-1);
     }
-
 }
