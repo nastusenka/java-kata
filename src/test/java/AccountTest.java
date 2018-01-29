@@ -22,4 +22,11 @@ public class AccountTest {
     public void testDepositBelowZero() throws IllegalArgumentException, InvalidBalanceException {
         new Account(50).deposit(-1);
     }
+
+    @Test
+    public void testWithdraw() throws InvalidBalanceException{
+        Account account = new Account(100);
+        account.withdraw(50);
+        Assert.assertEquals(50,account.getAccountBalance());
+    }
 }
