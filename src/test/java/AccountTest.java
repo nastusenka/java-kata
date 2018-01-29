@@ -29,4 +29,10 @@ public class AccountTest {
         account.withdraw(50);
         Assert.assertEquals(50,account.getAccountBalance());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWithdrawBelowZero() throws IllegalArgumentException, InvalidBalanceException {
+        new Account(50).deposit(-1);
+    }
+
 }
