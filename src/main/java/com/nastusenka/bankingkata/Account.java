@@ -29,6 +29,7 @@ public class Account {
     }
 
     public void withdraw(int accountAmount) {
+        if (accountAmount < 0) { throw new IllegalArgumentException("The parameter cann't be below zero");}
         accountBalance = accountBalance - accountAmount;
         LocalDateTime dateTime = null;
         Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
