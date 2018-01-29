@@ -28,8 +28,11 @@ public class Account {
         transactions.add(transaction);
     }
 
-    public void withdraw(int accountAmount) {
+    public void withdraw(int accountAmount) throws InvalidBalanceException, IllegalArgumentException {
         if (accountAmount < 0) { throw new IllegalArgumentException("The parameter cann't be below zero");}
+        if (accountAmount > accountBalance) {
+            throw new InvalidBalanceException();
+        }
         accountBalance = accountBalance - accountAmount;
         LocalDateTime dateTime = null;
         Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
