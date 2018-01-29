@@ -34,4 +34,9 @@ public class AccountTest {
     public void testWithdrawBelowZero() throws IllegalArgumentException, InvalidBalanceException {
         new Account(50).withdraw(-1);
     }
+
+    @Test(expected = InvalidBalanceException.class)
+    public void testWithdrawBalanceBelowZero() throws InvalidBalanceException {
+        new Account(50).withdraw(100);
+    }
 }
