@@ -27,4 +27,11 @@ public class Account {
         Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
         transactions.add(transaction);
     }
+
+    public void withdraw(int accountAmount) {
+        accountBalance = accountBalance - accountAmount;
+        LocalDateTime dateTime = null;
+        Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
+        transactions.add(transaction);
+    }
 }
