@@ -3,6 +3,7 @@ package com.nastusenka.bankingkata;
 import com.nastusenka.bankingkata.exceptions.InvalidBalanceException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,20 @@ public class Account {
         }
         accountBalance = accountBalance - accountAmount;
         LocalDateTime dateTime = null;
-        Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
+        Transaction transaction = new Transaction(accountBalance, -accountAmount, dateTime.now());
         transactions.add(transaction);
+    }
+
+    public String printStatement() {
+        String output = String.format("|%20s|%20s|%20s|%n", "DATE", "AMOUNT", "BALANCE");
+        for (Transaction temp : transactions) {
+            output = output + String.format(
+                    "|%20s|%20d|%20d|%n",
+                    temp.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                    temp.getAmount(),
+                    temp.getBalance()
+            );
+        }
+        return output;
     }
 }
