@@ -4,6 +4,9 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AccountTest {
 
     @Test(expected = InvalidBalanceException.class)
@@ -38,5 +41,25 @@ public class AccountTest {
     @Test(expected = InvalidBalanceException.class)
     public void testWithdrawBalanceBelowZero() throws InvalidBalanceException {
         new Account(50).withdraw(100);
+    }
+
+    @Test
+    public void testPrintStatement() throws InvalidBalanceException {
+        LocalDateTime dateTime = LocalDateTime.now();
+        int depositAmount = 500;
+        int withdrawAmount = 200;
+        String expectedOutput = String.format(
+                "|%20s|%+20d|%20d|%n|%2$s|%-20d|%20d|%n ",
+                dateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
+                depositAmount,
+                depositAmount,
+                withdrawAmount,
+                300);
+
+        Account account = new Account(0);
+        account.deposit(depositAmount);
+        account.withdraw(withdrawAmount);
+
+        Assert.assertEquals(expectedOutput, account.printStatement);
     }
 }
