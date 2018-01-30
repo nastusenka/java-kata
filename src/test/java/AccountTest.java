@@ -49,17 +49,18 @@ public class AccountTest {
         int depositAmount = 500;
         int withdrawAmount = 200;
         String expectedOutput = String.format(
-                "|%20s|%+20d|%20d|%n|%2$s|%-20d|%20d|%n ",
-                dateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
+                "|%20s|%20s|%20s|%n|%20s|%20d|%20d|%n|%4$20s|%20d|%20d|%n",
+                "DATE", "AMOUNT", "BALANCE",
+                dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 depositAmount,
                 depositAmount,
-                withdrawAmount,
+                -withdrawAmount,
                 300);
 
         Account account = new Account(0);
         account.deposit(depositAmount);
         account.withdraw(withdrawAmount);
 
-        Assert.assertEquals(expectedOutput, account.printStatement);
+        Assert.assertEquals(expectedOutput, account.printStatement());
     }
 }
