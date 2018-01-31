@@ -1,6 +1,5 @@
 import com.nastusenka.bankingkata.Account;
 import com.nastusenka.bankingkata.exceptions.InvalidBalanceException;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class AccountTest {
     public void testDeposit() throws InvalidBalanceException {
         Account account = new Account(50);
         account.deposit(500);
-        Assert.assertEquals(550, account.getAccountBalance());
+        Assert.assertEquals(550, account.getBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -30,7 +29,7 @@ public class AccountTest {
     public void testWithdraw() throws InvalidBalanceException{
         Account account = new Account(100);
         account.withdraw(50);
-        Assert.assertEquals(50,account.getAccountBalance());
+        Assert.assertEquals(50,account.getBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)

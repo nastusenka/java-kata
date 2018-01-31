@@ -9,52 +9,58 @@ import java.util.List;
 
 public class Account {
 
-    private int accountBalance;
+    private int balance;
     private List<Transaction> transactions = new ArrayList<>();
 
     /**
      * Constructor with parameters validation
      *
-     * @param accountBalance Initial amount for account creation
+     * @param balance Initial amount for account creation
      * @throws InvalidBalanceException when the balance is below zero
      */
-    public Account(int accountBalance) throws InvalidBalanceException {
-        if (accountBalance < 0) throw new InvalidBalanceException();
-        this.accountBalance = accountBalance;
+    public Account(int balance) throws InvalidBalanceException {
+        if (balance < 0) {
+            throw new InvalidBalanceException();
+        }
+        this.balance = balance;
     }
 
-    public int getAccountBalance() {
-        return accountBalance;
+    public int getBalance() {
+        return balance;
     }
 
     /**
      * Replenish account and save transaction
      *
-     * @param accountAmount Amount to deposit
+     * @param amount Amount to deposit
      */
-    public void deposit(int accountAmount) {
-        if (accountAmount < 0) { throw new IllegalArgumentException("The parameter can't be below zero");}
-        accountBalance = accountBalance + accountAmount;
+    public void deposit(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("The parameter can't be below zero");
+        }
+        balance += amount;
         LocalDateTime dateTime = null;
-        Transaction transaction = new Transaction(accountBalance, accountAmount, dateTime.now());
+        Transaction transaction = new Transaction(balance, amount, dateTime.now());
         transactions.add(transaction);
     }
 
     /**
      * Withdraw from account and save transaction
      *
-     * @param accountAmount Amount to withdraw
+     * @param amount Amount to withdraw
      * @throws InvalidBalanceException when the balance is below zero
      * @throws IllegalArgumentException when the parameter is below zero
      */
-    public void withdraw(int accountAmount) throws InvalidBalanceException, IllegalArgumentException {
-        if (accountAmount < 0) { throw new IllegalArgumentException("The parameter can't be below zero");}
-        if (accountAmount > accountBalance) {
+    public void withdraw(int amount) throws InvalidBalanceException, IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("The parameter can't be below zero");
+        }
+        if (amount > balance) {
             throw new InvalidBalanceException();
         }
-        accountBalance = accountBalance - accountAmount;
+        balance = balance - amount;
         LocalDateTime dateTime = null;
-        Transaction transaction = new Transaction(accountBalance, -accountAmount, dateTime.now());
+        Transaction transaction = new Transaction(balance, -amount, dateTime.now());
         transactions.add(transaction);
     }
 
@@ -65,12 +71,12 @@ public class Account {
      */
     public String printStatement() {
         String output = String.format("|%20s|%20s|%20s|%n", "DATE", "AMOUNT", "BALANCE");
-        for (Transaction temp : transactions) {
+        for (Transaction transaction : transactions) {
             output = output + String.format(
                     "|%20s|%20d|%20d|%n",
-                    temp.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                    temp.getAmount(),
-                    temp.getBalance()
+                    transaction.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                    transaction.getAmount(),
+                    transaction.getBalance()
             );
         }
         return output;
