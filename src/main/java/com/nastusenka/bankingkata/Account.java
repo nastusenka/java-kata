@@ -20,7 +20,7 @@ public class Account {
      */
     public Account(int balance) throws InvalidBalanceException {
         if (balance < 0) {
-            throw new InvalidBalanceException();
+            throw new InvalidBalanceException("Initial balance should be positive");
         }
         this.balance = balance;
     }
@@ -55,7 +55,7 @@ public class Account {
             throw new IllegalArgumentException("The parameter can't be below zero");
         }
         if (amount > balance) {
-            throw new InvalidBalanceException();
+            throw new InvalidBalanceException("Can not withdraw the amount provided, balance will become negative");
         }
         balance = balance - amount;
         Transaction transaction = new Transaction(balance, -amount, LocalDateTime.now());
