@@ -39,8 +39,7 @@ public class Account {
             throw new IllegalArgumentException("The parameter can't be below zero");
         }
         balance += amount;
-        LocalDateTime dateTime = null;
-        Transaction transaction = new Transaction(balance, amount, dateTime.now());
+        Transaction transaction = new Transaction(balance, amount, LocalDateTime.now());
         transactions.add(transaction);
     }
 
@@ -59,8 +58,7 @@ public class Account {
             throw new InvalidBalanceException();
         }
         balance = balance - amount;
-        LocalDateTime dateTime = null;
-        Transaction transaction = new Transaction(balance, -amount, dateTime.now());
+        Transaction transaction = new Transaction(balance, -amount, LocalDateTime.now());
         transactions.add(transaction);
     }
 
