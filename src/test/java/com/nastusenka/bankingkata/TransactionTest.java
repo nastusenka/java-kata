@@ -1,3 +1,5 @@
+package com.nastusenka.bankingkata;
+
 import com.nastusenka.bankingkata.model.DepositTransaction;
 import com.nastusenka.bankingkata.model.WithdrawalTransaction;
 import org.junit.Assert;

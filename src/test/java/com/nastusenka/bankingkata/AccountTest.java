@@ -1,3 +1,5 @@
+package com.nastusenka.bankingkata;
+
 import com.nastusenka.bankingkata.Account;
 import com.nastusenka.bankingkata.exceptions.InvalidBalanceException;
 import org.junit.Assert;
