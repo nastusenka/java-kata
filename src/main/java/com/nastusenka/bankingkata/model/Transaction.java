@@ -1,11 +1,11 @@
-package com.nastusenka.bankingkata;
+package com.nastusenka.bankingkata.model;
 
 import java.time.LocalDateTime;
 
-public class Transaction {
+public abstract class Transaction {
 
     private int balance;
-    private int amount;
+    protected int amount;
     private LocalDateTime date;
 
     public Transaction(int balance, int amount, LocalDateTime date) {
@@ -18,9 +18,7 @@ public class Transaction {
         return balance;
     }
 
-    public int getAmount() {
-        return amount;
-    }
+    public abstract int getAmount();
 
     public LocalDateTime getDate() {
         return date;

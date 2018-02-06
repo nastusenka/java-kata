@@ -1,6 +1,9 @@
 package com.nastusenka.bankingkata;
 
 import com.nastusenka.bankingkata.exceptions.InvalidBalanceException;
+import com.nastusenka.bankingkata.model.DepositTransaction;
+import com.nastusenka.bankingkata.model.Transaction;
+import com.nastusenka.bankingkata.model.WithdrawalTransaction;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,11 +38,11 @@ public class Account {
      * @param amount Amount to deposit
      */
     public void deposit(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("The parameter can't be below zero");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount should be positive");
         }
         balance += amount;
-        Transaction transaction = new Transaction(balance, amount, LocalDateTime.now());
+        Transaction transaction = new DepositTransaction(balance, amount, LocalDateTime.now());
         transactions.add(transaction);
     }
 
@@ -51,14 +54,14 @@ public class Account {
      * @throws IllegalArgumentException when the parameter is below zero
      */
     public void withdraw(int amount) throws InvalidBalanceException, IllegalArgumentException {
-        if (amount < 0) {
-            throw new IllegalArgumentException("The parameter can't be below zero");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount should be positive");
         }
         if (amount > balance) {
             throw new InvalidBalanceException("Can not withdraw the amount provided, balance will become negative");
         }
         balance = balance - amount;
-        Transaction transaction = new Transaction(balance, -amount, LocalDateTime.now());
+        Transaction transaction = new WithdrawalTransaction(balance, amount, LocalDateTime.now());
         transactions.add(transaction);
     }
 
